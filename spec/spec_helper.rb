@@ -15,6 +15,8 @@ RSpec.configure do |config|
   end
 end
 
+$LOAD_PATH << '.'
+require 'whoiam'
 Dir.glob('./spec/support/*.rb').each do |support|
   load support
 end
