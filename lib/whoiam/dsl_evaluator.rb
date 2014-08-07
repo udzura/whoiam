@@ -2,7 +2,7 @@ class WhoIAM::DSLEvaluator
   def initialize(&block)
     instance_eval(&block)
   end
-  attr_accessor :users, :groupes, :roles
+  attr_accessor :users, :groups, :roles
 
   def user name, &b
     user = WhoIAM::User.from_hash(DSL2Hash.parse(&b).merge(user_name: name))
@@ -11,9 +11,15 @@ class WhoIAM::DSLEvaluator
   end
 
   def group name, &b
+    group = WhoIAM::Group.from_hash(DSL2Hash.parse(&b))
+    self.groups ||= []
+    self.groups << group
   end
 
   def role name, &b
+    role = WhoIAM::Role.from_hash(DSL2Hash.parse(&b))
+    self.roles ||= []
+    self.roles << role
   end
 
   module DSL2Hash

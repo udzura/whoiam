@@ -67,4 +67,14 @@ describe 'DSL' do
       }.not_to raise_error
     }
   end
+
+  describe 'DSL successfully parsed' do
+    let(:result) { evaluate_dsl }
+
+    it 'should be parsed and create objects' do
+      expect(result.users).to  have_exactly(1).user
+      expect(result.groups).to have_exactly(1).group
+      expect(result.roles).to  have_exactly(1).role
+    end
+  end
 end
